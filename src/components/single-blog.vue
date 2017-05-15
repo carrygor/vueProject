@@ -2,7 +2,7 @@
 
   <div class="blog-post-wrapper">
     <ul class="blog-post">
-      <li v-for="blog in blogs" class="blog-item" >
+      <li class="blog-item" >
         <div class="blog-header">
           <div class="title">
             <h2>{{blog.title}}</h2>
@@ -31,9 +31,6 @@
         </div>
         <div class="blog-content" v-html="blog.content"></div>
         <div class="blog-footer">
-          <router-link v-bind:to="'blog/' + blog.customURL" class="btn-read-all">
-            阅读全文 »
-          </router-link>
         </div>
       </li>
     </ul>
@@ -48,22 +45,24 @@
 
 <script>
   export default {
-    name: 'blogPost',
+    name: 'single-blog',
     data () {
       return {
-        blogs: []
+        blog: []
       }
     },
     mounted: function() {
-      this.$http.get('http://localhost:3000/api/getBlogs', [])
+      var url = 'http://localhost:3000/api/getBlogs/' + this.$route.params.customURL
+      this.$http.get(url, [])
         .then(function (res) {
-          this.blogs = res.data
-        },
-        function (res) {
-          console.log("error:")
-          console.log(res)
-        })
+            this.blog  = res.data
+          },
+          function (res) {
+            console.log("error:")
+            console.log(res)
+          })
     }
   }
+
 
 </script>

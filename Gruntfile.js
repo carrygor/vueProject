@@ -12,9 +12,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                   expand:true,
-                  cwd:'templet',
+                  cwd:'src/assets',
                   src:'**/*.less',
-                  dest: 'templet/',
+                  dest: 'src/assets/',
                   ext: '.css'
                 }]
 
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
       },
       watch: {
         scripts: {
-          files: ['templet/css/*.less'],
+          files: ['src/assets/css/*.less'],
           tasks: ['less']
         }
       }

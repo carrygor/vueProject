@@ -139,11 +139,11 @@
   var editor = new wangEditor('wangeditor');
   editor.create();
 
+
   editor.onchange = function () {
     document.getElementById("content").value = editor.$txt.html()
     console.log(editor.$txt.html())
   }
-
 </script>
 
 </body>
