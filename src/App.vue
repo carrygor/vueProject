@@ -6,8 +6,16 @@
 </template>
 
 <script>
+
 export default {
-  name: 'app'
+  data() {
+    return {}
+  },
+  beforeCreate(){
+    this.auth.login(this, '', function (data) {
+    })
+
+  },
 }
 </script>
 

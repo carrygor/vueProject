@@ -53,6 +53,7 @@
 <script>
 
   import Editor from './editor'
+
   export default {
     data() {
       return {
@@ -63,6 +64,18 @@
         // set image upload api url
         uploadUrl: ''
       }
+    },
+    beforeCreate(){
+//      var Vue = this
+//      this.auth.login(this, '', function (data) {
+//        if(data == 0){
+//          Vue.$router.push('admin/login')
+//        }
+//      })
+      if(!this.auth.data.isAuth){
+        this.$router.push('admin/login')
+      }
+
     },
     computed: {},
     ready() {},
