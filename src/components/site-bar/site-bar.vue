@@ -43,19 +43,19 @@
         <div class="site-state">
           <div class="site-state-item">
             <a href="/">
-              <span class="count">183</span>
+              <span class="count">{{blogNum}}</span>
               <span class="name">日志</span>
             </a>
           </div>
           <div class="site-state-item">
             <a href="/">
-              <span class="count">6</span>
+              <span class="count">{{classificationNum}}</span>
               <span class="name">分类</span>
             </a>
           </div>
           <div class="site-state-item">
             <a href="/">
-              <span class="count">111</span>
+              <span class="count">{{tagNum}}</span>
               <span class="name">标签</span>
             </a>
           </div>
@@ -92,5 +92,24 @@
 
 <script>
 
+  export default {
+    data() {
+      return {
+        blogNum: '0',
+        tagNum: '0',
+        classificationNum: '0',
+      }
+    },
+    beforeCreate(){
+      this.$http.get('http://localhost:3000/api/getSiteBar')
+        .then(function (res) {
+
+          this.blogNum = res.data.blogNum
+          this.tagNum = res.data.tagNum
+          this.classificationNum = res.data.classificationNum
+
+        })
+    }
+  }
 
 </script>
