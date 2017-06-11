@@ -5,9 +5,13 @@
 export default {
 
   data:{
-    isAuth : false
+    loading: false,
+    isAuth : false,
+    mode : 'all',
+    key : ''
   },
   login(context, formData, callback) {
+    this.data.loading = true
     var that = this
 
     context.$http.post('http://localhost:3000/api/login', formData, {credentials : true})
@@ -22,12 +26,47 @@ export default {
           that.data.isAuth = false
           callback('0')
         }
+        that.data.loading = false
         //todo:登录
 
       },function (res) {
         console.log('登录错误: ' + res)
       })
 
+  },
+  getBlogs(context, callback) {
+
+    var url = 'http://localhost:3000/api/getBlogs/' + this.data.mode
+    if(this.data.key != ''){
+      url += '/' + this.data.key
+    }
+
+    context.$http.get(url, [])
+      .then(function (res) {
+          callback(res.data)
+        },
+        function (res) {
+          console.log("error:")
+          console.log(res)
+        })
+  },
+  getTags(context, callback) {
+    context.$http.get('http://localhost:3000/api/getTags',[])
+      .then(function (res) {
+        callback(res.data)
+      },
+      function (res) {
+        console.log('err: ' + res)
+      })
+  },
+  getcategories(context, callback) {
+    context.$http.get('http://localhost:3000/api/getcategories',[])
+      .then(function (res) {
+          callback(res.data)
+        },
+        function (res) {
+          console.log('err: ' + res)
+        })
   }
 
 }

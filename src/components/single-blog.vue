@@ -51,8 +51,8 @@
         blog: []
       }
     },
-    mounted: function() {
-      var url = 'http://localhost:3000/api/getBlogs/' + this.$route.params.customURL
+    beforeMount: function() {
+      var url = 'http://localhost:3000/api/getBlog/' + this.$route.params.customURL
       this.$http.get(url, [])
         .then(function (res) {
             this.blog  = res.data

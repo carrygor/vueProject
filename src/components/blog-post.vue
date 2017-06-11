@@ -10,12 +10,12 @@
           <div class="meta">
             <div class="post-time">
               <i class="fa fa-calendar-o"></i>
-              <span>发表于{{blog.createTime}}</span>
+              <span>发表于{{blog.createTime.substr(0,10)}}</span>
               <span class="divider">|</span>
             </div>
             <div class="post-category">
               <i class="fa fa-folder-o"></i>
-              <a href="javascript:">{{blog.category}}</a>
+              <a href="javascript:" @click="clickCategory(blog.category)">{{blog.category}}</a>
               <span class="divider">|</span>
             </div>
             <div class="post-comment">
@@ -54,15 +54,29 @@
         blogs: []
       }
     },
-    mounted: function() {
-      this.$http.get('http://localhost:3000/api/getBlogs', [])
-        .then(function (res) {
-          this.blogs = res.data
-        },
-        function (res) {
-          console.log("error:")
-          console.log(res)
+    methods: {
+      clickCategory: function (category) {
+        this.auth.data.mode = 'category'
+        this.auth.data.key = category
+        var that = this
+        this.auth.getBlogs(this, function (blogs) {
+          that.blogs = blogs
         })
+      }
+    },
+    beforeMount: function() {
+//      this.$http.get('http://localhost:3000/api/getBlogs', [])
+//        .then(function (res) {
+//          this.blogs = res.data
+//        },
+//        function (res) {
+//          console.log("error:")
+//          console.log(res)
+//        })
+      var that = this
+      this.auth.getBlogs(this, function (blogs) {
+        that.blogs = blogs
+      })
     }
   }
 

@@ -21,10 +21,10 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="/">
+            <router-link v-bind:to="'tag'">
               <i class="fa fa-tags"></i>
               标签
-            </a>
+            </router-link>
           </li>
           <li class="menu-item">
             <a href="/">
@@ -48,16 +48,16 @@
             </a>
           </div>
           <div class="site-state-item">
-            <a href="/">
+            <router-link v-bind:to="'category'">
               <span class="count">{{classificationNum}}</span>
               <span class="name">分类</span>
-            </a>
+            </router-link>
           </div>
           <div class="site-state-item">
-            <a href="/">
+            <router-link v-bind:to="'tag'">
               <span class="count">{{tagNum}}</span>
               <span class="name">标签</span>
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="site-link">

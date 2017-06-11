@@ -11,6 +11,8 @@ import App from '@/App'
 //index-components
 import blogPost from '@/components/blog-post'
 import singleBlog from '@/components/single-blog'
+import category from '@/components/category'
+import tag from '@/components/tag'
 
 //admin-components
 import admin from '@/components/admin'
@@ -26,6 +28,16 @@ export default new Router({
       path: '/',
       name: 'blogPost',
       component: blogPost
+    },
+    {
+      path: '/category',
+      name: 'category',
+      component: category
+    },
+    {
+      path: '/tag',
+      name: 'tag',
+      component: tag
     },
     {
       path:'/admin',

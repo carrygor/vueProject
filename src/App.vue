@@ -13,6 +13,7 @@ export default {
   },
   beforeCreate(){
     this.auth.login(this, '', function (data) {
+      //todo--处理自动登录失败
     })
 
   },

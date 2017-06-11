@@ -72,7 +72,7 @@
 //          Vue.$router.push('admin/login')
 //        }
 //      })
-      if(!this.auth.data.isAuth){
+      if(!this.auth.data.isAuth && !this.auth.data.loading){
         this.$router.push('admin/login')
       }
 
