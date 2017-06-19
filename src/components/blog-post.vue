@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div class="blog-content" v-html="blog.content"></div>
+        <div class="blog-content" v-html="blog.summary"></div>
         <div class="blog-footer">
           <router-link v-bind:to="'blog/' + blog.customURL" class="btn-read-all">
             阅读全文 »

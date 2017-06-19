@@ -1,6 +1,7 @@
 <template>
   <div class="editor-wrapper">
     <input id="content" type="text" name="content" hidden>
+    <input id="summary" type="text" name="summary" hidden>
     <div id="editor" v-html="inputContent" @input="outputContent"></div>
   </div>
 </template>
@@ -40,6 +41,8 @@
         editor.config.uploadImgUrl = this.uploadUrl
         editor.onchange = function () {
           document.getElementById("content").value = editor.$txt.html()
+          document.getElementById("summary").value = editor.$txt.text().substring(0,139)
+          console.log(editor.$txt.text())
         }
 //        editor.onchange = function() {
 //          self.formatContent(this.$txt.html())
