@@ -48,13 +48,13 @@
             </a>
           </div>
           <div class="site-state-item">
-            <router-link v-bind:to="'category'">
+            <router-link v-bind:to="'/category'">
               <span class="count">{{classificationNum}}</span>
               <span class="name">分类</span>
             </router-link>
           </div>
           <div class="site-state-item">
-            <router-link v-bind:to="'tag'">
+            <router-link v-bind:to="'/tag'">
               <span class="count">{{tagNum}}</span>
               <span class="name">标签</span>
             </router-link>
