@@ -65,7 +65,7 @@
       }
     },
     beforeMount: function() {
-//      this.$http.get('http://localhost:3000/api/getBlogs', [])
+//      this.$http.get('http://carrygor.com/api/getBlogs', [])
 //        .then(function (res) {
 //          this.blogs = res.data
 //        },

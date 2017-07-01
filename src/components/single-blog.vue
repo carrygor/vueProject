@@ -1,7 +1,7 @@
 <template>
 
   <div class="blog-post-wrapper">
-    <ul class="blog-post">
+    <ul v-if="!isAuth" class="blog-post">
       <li class="blog-item" >
         <div class="blog-header">
           <div class="title">
@@ -35,6 +35,41 @@
       </li>
     </ul>
 
+    <form v-if="isAuth" action="http://carrygor.com/api/editBlog" method="post">
+      <input v-model="blog._id" type="text" name="_id" hidden>
+      <ul class="edit-list">
+        <li class="edit-item">
+          <label for="title">标题：</label>
+          <input v-model="blog.title" type="text" id="title" name="title">
+        </li>
+        <li class="edit-item">
+          <v-editor
+            :input-content="inputContent"
+            :upload-url="uploadUrl"
+            v-model="outputContent"></v-editor>
+        </li>
+        <li class="edit-item">
+          <label for="category">分类：</label>
+          <input disabled v-model="blog.category" type="text" id="category" name="category">
+        </li>
+        <li class="edit-item">
+          <label for="customURL"> URL： /</label>
+          <input v-model="blog.customURL" type="text" id="customURL" name="customURL">
+        </li>
+        <li class="edit-item">
+          <label for="tag">标签：</label>
+          <input disabled v-model="tag" type="text" id="tag" name="tag">
+        </li>
+        <li class="edit-item">
+        <label>设置：</label>
+        <label><input name="delete" type="checkbox" value="1">删除该博客</label>
+        </li>
+        <li class="edit-item submit">
+          <input type="submit" class="btn-submit" value="保存"/>
+        </li>
+      </ul>
+    </form>
+
     <ul class="comment_list">
       <li class="comment" v-for="reply in replies">
         <p class="name">{{reply.replyer}}</p>
@@ -43,7 +78,7 @@
       </li>
     </ul>
 
-    <div class="reply_box">
+    <div v-if="!isAuth" class="reply_box">
       <h4>发表回复</h4>
       <label>昵称：<input type="text" v-model="newReply.replyer" ></label>
       <label>邮箱：<input type="text" v-model="newReply.replyerEmail"></label>
@@ -61,6 +96,7 @@
 
 <script>
   import commentEditor from './comment-editor'
+  import Editor from './editor'
 
   export default {
     name: 'single-blog',
@@ -73,11 +109,14 @@
           replyer: '',
           replyerEmail: '',
           content: ''
-        }
+        },
+        isAuth: false,
+        inputContent: ''
       }
     },
     beforeMount: function() {
       this.refresh()
+      this.isAuth = this.auth.data.isAuth
     },
     methods: {
       clickCategory: function (category) {
@@ -89,11 +128,12 @@
         })
       },
       refresh: function () {
-        var url = 'http://localhost:3000/api/getBlog/' + this.$route.params.customURL
+        var url = 'http://carrygor.com/api/getBlog/' + this.$route.params.customURL
         var vm = this
         this.$http.get(url, [])
           .then(function (res) {
-              vm.blog  = res.data.blog
+              vm.blog = res.data.blog
+              vm.inputContent = res.data.blog.content
               vm.blog.createTime = vm.blog.createTime.substr(0,10)
               vm.replies = res.data.replies
               vm.newReply.articleId = res.data.blog._id
@@ -108,7 +148,7 @@
       },
       postReply: function () {
         const vm = this
-        this.$http.post('http://localhost:3000/api/postReply', vm.newReply)
+        this.$http.post('http://carrygor.com/api/postReply', vm.newReply)
           .then(function (res) {
             vm.newReply.replyer = ''
             vm.newReply.replyerEmail = ''
@@ -119,7 +159,8 @@
       }
     },
     components : {
-      'comment-editor' : commentEditor
+      'comment-editor' : commentEditor,
+      'v-editor': Editor
     }
   }
 

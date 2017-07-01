@@ -9,13 +9,13 @@
       <nav class="site-nav">
         <ul class="menu">
           <li class="menu-item active">
-            <a href="/">
+            <a href="/blog">
               <i class="fa fa-home"></i>
               首页
             </a>
           </li>
           <li class="menu-item">
-            <a href="/">
+            <a href="/blog">
               <i class="fa fa-archive"></i>
               归档
             </a>
@@ -27,7 +27,7 @@
             </router-link>
           </li>
           <li class="menu-item">
-            <a href="/">
+            <a href="/blog">
               <i class="fa fa-search"></i>
               搜索
             </a>
@@ -42,7 +42,7 @@
         </div>
         <div class="site-state">
           <div class="site-state-item">
-            <a href="/">
+            <a href="/blog">
               <span class="count">{{blogNum}}</span>
               <span class="name">日志</span>
             </a>
@@ -61,19 +61,19 @@
           </div>
         </div>
         <div class="site-link">
-          <a href="/" class="link-item">
+          <a href="/blog" class="link-item">
             <i class="fa fa-github"></i>
             GitHub
           </a>
-          <a href="/" class="link-item">
+          <a href="/blog" class="link-item">
             <i class="fa fa-wechat"></i>
             微信
           </a>
-          <a href="/" class="link-item">
+          <a href="/blog" class="link-item">
             <i class="fa fa-globe"></i>
             知乎
           </a>
-          <a href="/" class="link-item">
+          <a href="/blog" class="link-item">
             <i class="fa fa-globe"></i>
             豆瓣
           </a>
@@ -101,7 +101,7 @@
       }
     },
     beforeCreate(){
-      this.$http.get('http://localhost:3000/api/getSiteBar')
+      this.$http.get('http://carrygor.com/api/getSiteBar')
         .then(function (res) {
 
           this.blogNum = res.data.blogNum

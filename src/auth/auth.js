@@ -14,7 +14,7 @@ export default {
     this.data.loading = true
     var that = this
 
-    context.$http.post('http://localhost:3000/api/login', formData, {credentials : true})
+    context.$http.post('http://carrygor.com/api/login', formData, {credentials : true})
       .then(function (res) {
 
         // console.log(res.data)
@@ -36,7 +36,7 @@ export default {
   },
   getBlogs(context, callback) {
 
-    var url = 'http://localhost:3000/api/getBlogs/' + this.data.mode
+    var url = 'http://carrygor.com/api/getBlogs/' + this.data.mode
     if(this.data.key != ''){
       url += '/' + this.data.key
     }
@@ -51,7 +51,7 @@ export default {
         })
   },
   getTags(context, callback) {
-    context.$http.get('http://localhost:3000/api/getTags',[])
+    context.$http.get('http://carrygor.com/api/getTags',[])
       .then(function (res) {
         callback(res.data)
       },
@@ -60,7 +60,7 @@ export default {
       })
   },
   getcategories(context, callback) {
-    context.$http.get('http://localhost:3000/api/getcategories',[])
+    context.$http.get('http://carrygor.com/api/getcategories',[])
       .then(function (res) {
           callback(res.data)
         },

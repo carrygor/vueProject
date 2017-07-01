@@ -1,6 +1,6 @@
 <template>
   <div class="blog-post-wrapper">
-    <form action="http://localhost:3000/api/postBlog" method="post">
+    <form action="http://carrygor.com/api/postBlog" method="post">
       <ul class="edit-list">
         <li class="edit-item">
           <label for="title">标题：</label>
@@ -29,11 +29,11 @@
           <label for="tag">标签：</label>
           <input type="text" id="tag" name="tag">
         </li>
-        <li class="edit-item">
-          <label>设置：</label>
-          <label><input name="setup" type="checkbox" value="禁止评论">禁止评论</label>
-          <label><input name="setup" type="checkbox" value="草稿">草稿</label>
-        </li>
+        <!--<li class="edit-item">-->
+          <!--<label>设置：</label>-->
+          <!--<label><input name="setup" type="checkbox" value="禁止评论">禁止评论</label>-->
+          <!--<label><input name="setup" type="checkbox" value="草稿">草稿</label>-->
+        <!--</li>-->
         <li class="edit-item submit">
           <input type="submit" class="btn-submit" value="保存"/>
         </li>
@@ -72,8 +72,19 @@
 //          Vue.$router.push('admin/login')
 //        }
 //      })
-      if(!this.auth.data.isAuth && !this.auth.data.loading){
-        this.$router.push('admin/login')
+      const vm = this
+      if(!vm.auth.data.isAuth){
+        if(vm.auth.data.loading){
+          var interval = setInterval(function () {
+            if(!vm.auth.data.loading){
+              if(!vm.auth.data.isAuth) {
+                vm.$router.push('admin/login')
+              }
+              clearInterval(interval)
+              return
+            }
+          }, 500)
+        }
       }
 
     },

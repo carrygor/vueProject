@@ -1,7 +1,7 @@
 <template>
 
   <div class="blog-post-wrapper">
-    <form action="http://localhost:3000/api/login" v-on:submit.prevent>
+    <form action="http://carrygor.com/api/login" v-on:submit.prevent>
       <div class="login_box">
         <h2>管理员登录</h2>
         <div class="row">
